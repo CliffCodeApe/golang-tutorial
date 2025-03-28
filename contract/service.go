@@ -13,4 +13,6 @@ type Service struct {
 type IntroService interface {
 	GetIntro(introID int) (*dto.IntroResponse, error)
 	CreateIntro(payload *dto.IntroRequest) (*dto.IntroResponse, error)
+	UpdateIntro(id int, payload *dto.IntroRequest) (*dto.IntroResponse, error)
+	DeleteIntro(id int) (*dto.IntroResponse, error)
 }

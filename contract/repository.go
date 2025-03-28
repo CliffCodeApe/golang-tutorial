@@ -13,4 +13,6 @@ type Repository struct {
 type IntroRepository interface {
 	CreateIntro(intro *entity.Intro) error
 	GetIntro(id int) (*entity.Intro, error)
+	UpdateIntro(id int, intro *entity.Intro) error
+	DeleteIntro(id int) error
 }

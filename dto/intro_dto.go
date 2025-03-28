@@ -21,7 +21,7 @@ type IntroData struct {
 type IntroResponse struct {
 	StatusCode int       `json:"status_code"`
 	Message    string    `json:"message"`
-	Data       IntroData `json:"data"`
+	Data       IntroData `json:"data,omitempty"`
 }
 
 // Error implements error.
