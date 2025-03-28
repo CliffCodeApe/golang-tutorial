@@ -53,16 +53,9 @@ func loadDatabaseConfig() string {
 	name := getFromEnv("DB_NAME")
 	host := getFromEnv("DB_HOST")
 	port := getFromEnv("DB_PORT")
-	sslMode := getFromEnv("DB_SSL_MODE") == "true"
 	timeZone := getFromEnv("DB_TIME_ZONE")
 
-	mode := "enable"
-
-	if !sslMode {
-		mode = "disable"
-	}
-
-	return fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=%s TimeZone=%s", host, user, pass, name, port, mode, timeZone)
+	return fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s TimeZone=%s", host, user, pass, name, port, timeZone)
 }
 
 func getFromEnv(key string) string {
