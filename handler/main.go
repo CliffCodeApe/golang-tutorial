@@ -21,7 +21,8 @@ type controller interface {
 
 func New(app *gin.Engine, service *contract.Service) {
 	allController := []controller{
-		&introController{},
+		&IntroController{},
+		&UserController{},
 	}
 
 	// do not modify the code below there

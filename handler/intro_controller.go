@@ -9,19 +9,19 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type introController struct {
+type IntroController struct {
 	service contract.IntroService
 }
 
-func (c *introController) getPrefix() string {
+func (c *IntroController) getPrefix() string {
 	return "/intro"
 }
 
-func (c *introController) initService(service *contract.Service) {
+func (c *IntroController) initService(service *contract.Service) {
 	c.service = service.Intro
 }
 
-func (c *introController) initRoute(app *gin.RouterGroup) {
+func (c *IntroController) initRoute(app *gin.RouterGroup) {
 	app.GET("/:id", c.GetIntro)
 	app.POST("/create", c.CreateIntro)
 	app.PUT("/:id", c.UpdateIntro)
@@ -29,7 +29,7 @@ func (c *introController) initRoute(app *gin.RouterGroup) {
 	app.DELETE("/:id", c.DeleteIntro)
 }
 
-func (c *introController) GetIntro(ctx *gin.Context) {
+func (c *IntroController) GetIntro(ctx *gin.Context) {
 	id := ctx.Param("id")
 	intID, err := strconv.Atoi(id)
 	if err != nil {
@@ -46,7 +46,7 @@ func (c *introController) GetIntro(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, response)
 }
 
-func (c *introController) CreateIntro(ctx *gin.Context) {
+func (c *IntroController) CreateIntro(ctx *gin.Context) {
 	var payload dto.IntroRequest
 	err := ctx.ShouldBindJSON(&payload)
 	if err != nil {
@@ -63,7 +63,7 @@ func (c *introController) CreateIntro(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, response)
 }
 
-func (c *introController) UpdateIntro(ctx *gin.Context) {
+func (c *IntroController) UpdateIntro(ctx *gin.Context) {
 	id := ctx.Param("id")
 	intID, err := strconv.Atoi(id)
 	if err != nil {
@@ -88,7 +88,7 @@ func (c *introController) UpdateIntro(ctx *gin.Context) {
 
 }
 
-func (c *introController) DeleteIntro(ctx *gin.Context) {
+func (c *IntroController) DeleteIntro(ctx *gin.Context) {
 	id := ctx.Param("id")
 	intID, err := strconv.Atoi(id)
 	if err != nil {

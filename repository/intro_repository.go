@@ -7,17 +7,17 @@ import (
 	"gorm.io/gorm"
 )
 
-type introRepo struct {
+type IntroRepo struct {
 	db *gorm.DB
 }
 
 func implIntroRepository(db *gorm.DB) contract.IntroRepository {
-	return &introRepo{
+	return &IntroRepo{
 		db: db,
 	}
 }
 
-func (r *introRepo) GetIntro(id int) (*entity.Intro, error) {
+func (r *IntroRepo) GetIntro(id int) (*entity.Intro, error) {
 	var intro entity.Intro
 	err := r.db.Table("intro").Where("id = ?", id).First(&intro).Error
 	if err != nil {
@@ -26,14 +26,14 @@ func (r *introRepo) GetIntro(id int) (*entity.Intro, error) {
 	return &intro, err
 }
 
-func (r *introRepo) CreateIntro(intro *entity.Intro) error {
+func (r *IntroRepo) CreateIntro(intro *entity.Intro) error {
 	return r.db.Table("intro").Create(intro).Error
 }
 
-func (r *introRepo) UpdateIntro(id int, intro *entity.Intro) error {
+func (r *IntroRepo) UpdateIntro(id int, intro *entity.Intro) error {
 	return r.db.Where("id = ?", id).Updates(&intro).Error
 }
 
-func (r *introRepo) DeleteIntro(id int) error {
+func (r *IntroRepo) DeleteIntro(id int) error {
 	return r.db.Where("id = ?", id).Delete(&entity.Intro{}).Error
 }
