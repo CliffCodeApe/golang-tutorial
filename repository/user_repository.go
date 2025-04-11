@@ -30,6 +30,15 @@ func (r *UserRepo) CreateUser(user *entity.User) error {
 	return r.db.Table("users").Create(user).Error
 }
 
+func (r *UserRepo) GetUserByEmail(email string) (*entity.User, error) {
+	var user entity.User
+	err := r.db.Table("users").Where("email = ?", email).First(&user).Error
+	if err != nil {
+		return nil, err
+	}
+	return &user, err
+}
+
 func (r *UserRepo) CheckEmail(email string) (bool, error) {
 	var exists bool
 	err := r.db.Raw("SELECT EXISTS (SELECT 1 FROM users WHERE email = $1)", email).Scan(&exists).Error
